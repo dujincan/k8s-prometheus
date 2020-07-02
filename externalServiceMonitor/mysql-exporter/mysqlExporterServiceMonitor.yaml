@@ -1,0 +1,19 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  labels:
+    app: mysql-exporter
+  name: mysql-exporter
+  namespace: monitoring-external
+spec:
+  endpoints:
+  - interval: 15s
+    port: http-9105
+    scheme: http
+  jobLabel: app
+  namespaceSelector:
+    matchNames:
+    - monitoring-external
+  selector:
+    matchLabels:
+      app: mysql-exporter

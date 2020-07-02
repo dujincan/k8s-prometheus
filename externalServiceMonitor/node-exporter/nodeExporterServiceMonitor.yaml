@@ -1,0 +1,26 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  labels:
+    app: external-node-exporter
+  name: external-node-exporter
+  namespace: monitoring-external
+spec:
+  endpoints:
+  - interval: 15s
+    port: http-9100
+    scheme: http
+    relabelings:
+    - action: replace
+      regex: (.*)
+      replacement: $1
+      sourceLabels:
+      - __meta_kubernetes_pod_node_name
+      targetLabel: instance
+  jobLabel: app
+  namespaceSelector:
+    matchNames:
+    - monitoring-external
+  selector:
+    matchLabels:
+      app: external-node-exporter

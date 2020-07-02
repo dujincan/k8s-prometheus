@@ -1,0 +1,35 @@
+##
+# Host Database
+#
+# localhost is used to configure the loopback interface
+# when the system is booting.  Do not change this entry.
+##
+127.0.0.1	localhost
+255.255.255.255	broadcasthost
+::1             localhost
+10.64.50.225 vcenter.dida100.cn
+10.64.50.238 nexus-manager-web.org
+10.64.80.204 dashboard.k8s.local
+10.64.80.204 prometheus.k8s.local
+10.64.80.204 grafana.k8s.local
+10.64.80.204 alertmanager.k8s.local
+10.64.80.204 jenkins.local
+10.64.80.200 gitlab.k8s.local
+10.64.80.200 rabbitmq.k8s.local
+10.64.80.200 rabbitmq-ha.k8s.local
+10.64.80.200 prometheus.k8s.local
+10.64.80.200 grafana.k8s.local
+10.64.80.200 core.harbor.k8s.local
+10.64.80.200 kibana.k8s.local
+10.64.80.200 kubeapps.k8s.local
+10.64.80.201 octant.k8s.local
+10.64.80.118 rancher.local
+10.64.80.117 elk.local
+10.64.50.238 registry.io
+10.64.80.41 ceph.mgr.dashboard.local
+#61.160.224.33 www.kuaiche100.cn
+# Added by Docker Desktop
+# To allow the same kube context to work on the host and the container:
+127.0.0.1 kubernetes.docker.internal
+# End of section
+	

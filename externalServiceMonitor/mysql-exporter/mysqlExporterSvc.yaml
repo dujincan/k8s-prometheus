@@ -1,0 +1,36 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: mysql-exporter
+  namespace: monitoring-external
+  labels:
+    app: mysql-exporter
+spec:
+  type: ClusterIP
+  clusterIP: None
+  ports:
+  - name: http-9105
+    port: 9105
+    protocol: TCP
+    targetPort: http-9105
+  sessionAffinity: None
+status:
+  loadBalancer: {}
+---
+apiVersion: v1
+kind: Endpoints
+metadata:
+  name: mysql-exporter
+  namespace: monitoring-external
+  labels:
+    app: mysql-exporter
+subsets:
+- addresses:
+  - ip: 121.43.184.235
+    nodeName: prod-rds-rodida
+  - ip: 116.62.41.156
+    nodeName: prod-rds
+  ports:
+  - name: http-9105
+    port: 9105
+    protocol: TCP

@@ -1,0 +1,82 @@
+- job_name: 'blackbox-exporter-webstatus'
+  metrics_path: /probe
+  scrape_interval: 15s
+  scrape_timeout: 10s
+  params:
+    module: [http_2xx]
+  static_configs:
+    - targets:
+      - http://www.kuaiche100.cn
+      - http://yongyou.yongyou:1212
+      - http://www.kuaiche100.com
+      - http://jumpserver.kuaiche100.cn
+  relabel_configs:
+    - source_labels: [__address__]
+      target_label: __param_target
+    - source_labels: [__param_target]
+      target_label: instance
+    - target_label: __address__
+      replacement: blackbox.monitoring-external:9115
+
+- job_name: 'blackbox-exporter-portstatus'
+  metrics_path: /probe
+  scrape_interval: 15s
+  scrape_timeout: 10s
+  params:
+    module: [tcp_connect]
+  static_configs:
+    - targets:
+      - wuche-server.external-service:18080
+      - shangxing-share-folder-server.external-service:13389
+      - kuaiche-com-80.external-service:80
+      - kuaiche-com-8080.external-service:8080
+      - yongyou.yongyou:1212
+  relabel_configs:
+    - source_labels: [__address__]
+      target_label: __param_target
+    - source_labels: [__param_target]
+      target_label: instance
+    - target_label: __address__
+      replacement: blackbox.monitoring-external:9115
+
+- job_name: 'cadvisor'
+  metrics_path: /metrics
+  scrape_interval: 15s
+  scrape_timeout: 10s
+  static_configs:
+      - targets: [dockerjack:8080, kuaicheweb:8081,jumpserver:8082,dockermother:8080,dockerrose:8080,tomcat1:7070,tomcat2:7070,prod-yaojet-nginx:8080,prod-yaojet-dida:8080]
+
+- job_name: "rabbitmp-exporter"
+  metrics_path: /metrics
+  scrape_interval: 15s
+  scrape_timeout: 10s
+  static_configs:
+    - targets: [rabbitmq-exproter-prometheus-rabbitmq-exporter.rabbitmq:9419]
+
+- job_name: "redis-exporter"
+  metrics_path: /metrics
+  scrape_interval: 15s
+  scrape_timeout: 10s
+  static_configs:
+      - targets: [aliyun-redis-exporter-prometheus-redis-exporter.external-service:9121]
+
+- job_name: "external-node-exporter"
+  metrics_path: /metrics
+  scrape_interval: 15s
+  scrape_timeout: 10s
+  static_configs:
+      - targets: [dockerjack:9100, kuaicheweb:9100,jumpserver:9100,dockermother:9100,dockerrose:9100,tomcat1:9100,tomcat2:9100,prod-yaojet-nginx:9100,prod-yaojet-dida:9100,prod-nginx:9100,pre-pre01:9100,pubservice:9100]
+
+- job_name: "mysql-exporter"
+  metrics_path: /metrics
+  scrape_interval: 15s
+  scrape_timeout: 10s
+  static_configs:
+      - targets: [aliyun-prod-ro-rds-prometheus-mysql-exporter.external-service:9104,aliyun-prod-rw-rds-prometheus-mysql-exporter.external-service:9104]
+
+- job_name: "mongo-exproter"
+  metrics_path: /metrics
+  scrape_interval: 15s
+  scrape_timeout: 10s
+  static_configs:
+      - targets: [aliyun-mongo-exporter-prometheus-mongodb-exporter.external-service:9216]

@@ -1,0 +1,19 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  labels:
+    app: mongo-exporter
+  name: mongo-exporter
+  namespace: monitoring-external
+spec:
+  endpoints:
+  - interval: 15s
+    port: http-9104
+    scheme: http
+  jobLabel: app
+  namespaceSelector:
+    matchNames:
+    - monitoring-external
+  selector:
+    matchLabels:
+      mongo: exporter

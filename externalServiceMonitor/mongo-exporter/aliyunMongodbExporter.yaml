@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: aliyun-mongo-exporter
+  namespace: monitoring-external
+  labels:
+    k8s-app: aliyun-mongo-exporter
+spec:
+  selector:
+    matchLabels:
+      k8s-app: aliyun-mongo-exporter
+  template:
+    metadata:
+      labels:
+        k8s-app: aliyun-mongo-exporter
+    spec:
+      containers:
+      - name: aliyun-mongo-exporter
+        image: bitnami/mongodb-exporter
+        args: ["--web.listen-address=:9104", "--mongodb.uri", "mongodb://root:9lWeffrKwoXA@dds-bp1f7a91d8b4f0f433290.mongodb.rds.aliyuncs.com:3717"]
+        ports:
+        - containerPort: 9104
+          name: http-9104
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    k8s-app: aliyun-mongo-exporter
+    mongo: exporter
+  name: aliyun-mongo-exporter
+  namespace: monitoring-external
+spec:
+  ports:
+  - name: http-9104
+    port: 9104
+    protocol: TCP
+    targetPort: http-9104
+  type: ClusterIP
+  selector:
+    k8s-app: aliyun-mongo-exporter
