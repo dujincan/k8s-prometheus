@@ -6,6 +6,7 @@ metadata:
   name: k8s
   namespace: monitoring
 spec:
+  retention: 30d
   alerting:
     alertmanagers:
     - name: alertmanager-main
