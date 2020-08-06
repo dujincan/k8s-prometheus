@@ -44,7 +44,7 @@
   scrape_interval: 15s
   scrape_timeout: 10s
   static_configs:
-      - targets: [dockerjack:8080, kuaicheweb:8081,jumpserver:8082,dockermother:8080,dockerrose:8080,tomcat1:7070,tomcat2:7070,prod-yaojet-nginx:8080,prod-yaojet-dida:8080]
+      - targets: [dockerjack:8080, kuaicheweb:8081,jumpserver:8082,dockermother:8080,dockerrose:8080,tomcat1:7070,tomcat2:7070,prod-yaojet-nginx:8080,prod-yaojet-dida:8080,kc-tomcat1:8082,kc-tomcat2:8082,kc-nginx:8082]
 
 - job_name: "rabbitmp-exporter"
   metrics_path: /metrics
@@ -65,7 +65,7 @@
   scrape_interval: 15s
   scrape_timeout: 10s
   static_configs:
-      - targets: [dockerjack:9100, kuaicheweb:9100,jumpserver:9100,dockermother:9100,dockerrose:9100,tomcat1:9100,tomcat2:9100,prod-yaojet-nginx:9100,prod-yaojet-dida:9100,prod-nginx:9100,pre-pre01:9100,pubservice:9100]
+      - targets: [dockerjack:9100, kuaicheweb:9100,jumpserver:9100,dockermother:9100,dockerrose:9100,tomcat1:9100,tomcat2:9100,prod-yaojet-nginx:9100,prod-yaojet-dida:9100,prod-nginx:9100,pre-pre01:9100,pubservice:9100,kc-nginx:9100,kc-tomcat1:9100,kc-tomcat2:9100]
 
 - job_name: "mysql-exporter"
   metrics_path: /metrics
